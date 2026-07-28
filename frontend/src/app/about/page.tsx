@@ -31,7 +31,7 @@ export default function AboutPage() {
           <div className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Leadership Team</div>
           <h2 className="text-3xl md:text-4xl font-bold">Experienced operator behind every account</h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            Our leadership team brings decades of combined experience across clinical operations,
+            Our leadership teams brings decades of combined experience across clinical operations,
             healthcare finance, and revenue cycle management — guiding strategy for 500+ practices nationwide.
           </p>
         </div>
