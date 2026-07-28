@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { CONTACT_EMAIL, submitToEmail } from "@/lib/contact";
+import { CONTACT_EMAIL, sendInquiry } from "@/lib/contact";
 
 export function ContactPageContent() {
   const [loading, setLoading] = useState(false);
@@ -25,40 +25,48 @@ export function ContactPageContent() {
     const data = new FormData(form);
 
     const fields = {
-      "Full name": String(data.get("fullName") || ""),
-      "Practice name": String(data.get("practiceName") || ""),
+      "Full name": String(data.get("fullName") || "").trim(),
+      "Practice name": String(data.get("practiceName") || "").trim(),
       Specialty: specialty || "Not specified",
       "Preferred contact time": contactTime || "Anytime",
-      Email: String(data.get("email") || ""),
-      Phone: String(data.get("phone") || ""),
-      Message: String(data.get("message") || ""),
+      Email: String(data.get("email") || "").trim(),
+      Phone: String(data.get("phone") || "").trim(),
+      Message: String(data.get("message") || "").trim(),
+      Source: "Website — Contact page",
     };
+
+    if (!fields["Full name"] || !fields.Email) {
+      toast.error("Please fill in name and email.");
+      return;
+    }
 
     setLoading(true);
 
-    try {
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: "Website Contact — Free Consultation",
-          _template: "table",
-          _captcha: "false",
-          ...fields,
-        }),
+    const result = await sendInquiry("Website Contact — Free Consultation", fields);
+
+    if (result.ok) {
+      toast.success("Message sent!", {
+        description: `Inquiry details delivered to ${CONTACT_EMAIL}`,
       });
-      if (!res.ok) throw new Error("fail");
-      toast.success("Message sent!", { description: `Delivered to ${CONTACT_EMAIL}` });
-    } catch {
-      submitToEmail("Website Contact — Free Consultation", fields);
-      toast.success("Opening email…", { description: `Send to ${CONTACT_EMAIL}` });
-    } finally {
-      setLoading(false);
       setSent(true);
       form.reset();
       setSpecialty("");
       setContactTime("");
+    } else if (result.method === "mailto") {
+      toast.message("Email app opened", {
+        description: `Please send so we receive it at ${CONTACT_EMAIL}`,
+      });
+      setSent(true);
+      form.reset();
+      setSpecialty("");
+      setContactTime("");
+    } else {
+      toast.error("Could not send inquiry", {
+        description: result.error || `Please email ${CONTACT_EMAIL} directly.`,
+      });
     }
+
+    setLoading(false);
   };
 
   return (

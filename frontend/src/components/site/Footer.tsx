@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
 import { BrandLogo } from "./BrandLogo";
-import { CONTACT_EMAIL, submitToEmail } from "@/lib/contact";
+import { CONTACT_EMAIL, sendInquiry } from "@/lib/contact";
 import {
   footerCompany,
   footerServices,
@@ -59,14 +59,27 @@ export function Footer() {
           <div className="mt-6">
             <div className="text-sm font-semibold mb-2">Newsletter</div>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                if (!email) return;
-                submitToEmail("Newsletter Subscription", {
-                  Email: email,
+                if (!email.trim()) return;
+                const result = await sendInquiry("Newsletter Subscription", {
+                  Email: email.trim(),
                   Message: "Please add me to the American Billing Solutions newsletter.",
+                  Source: "Website — Footer newsletter",
                 });
-                toast.success("Opening email…", { description: `Send to ${CONTACT_EMAIL}` });
+                if (result.ok) {
+                  toast.success("Subscribed!", {
+                    description: `Details sent to ${CONTACT_EMAIL}`,
+                  });
+                } else if (result.method === "mailto") {
+                  toast.message("Email app opened", {
+                    description: `Please send so we receive it at ${CONTACT_EMAIL}`,
+                  });
+                } else {
+                  toast.error("Could not subscribe", {
+                    description: result.error || `Email ${CONTACT_EMAIL} directly.`,
+                  });
+                }
                 setEmail("");
               }}
               className="flex gap-2"

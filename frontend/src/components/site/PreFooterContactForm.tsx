@@ -18,7 +18,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { toast } from "sonner";
-import { CONTACT_EMAIL, submitToEmail } from "@/lib/contact";
+import { CONTACT_EMAIL, sendInquiry } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
 const fieldClass =
@@ -40,6 +40,7 @@ export function PreFooterContactForm() {
       Phone: String(data.get("phone") || "").trim(),
       Practice: String(data.get("practice") || "").trim(),
       Message: String(data.get("message") || "").trim(),
+      Source: "Website — Pre-footer contact form",
     };
 
     if (!fields.Name || !fields.Email || !fields.Message) {
@@ -49,38 +50,27 @@ export function PreFooterContactForm() {
 
     setLoading(true);
 
-    try {
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          _subject: "Website Form — American Billing Solutions",
-          _template: "table",
-          _captcha: "false",
-          ...fields,
-        }),
-      });
+    const result = await sendInquiry("Website Inquiry — American Billing Solutions", fields);
 
-      if (!res.ok) throw new Error("FormSubmit failed");
-
+    if (result.ok) {
       setSent(true);
       form.reset();
       toast.success("Message sent!", {
-        description: `Delivered to ${CONTACT_EMAIL}`,
+        description: `Inquiry details delivered to ${CONTACT_EMAIL}`,
       });
-    } catch {
-      submitToEmail("Website Form — American Billing Solutions", fields);
-      toast.success("Opening email…", {
-        description: `Send to ${CONTACT_EMAIL}`,
+    } else if (result.method === "mailto") {
+      toast.message("Email app opened", {
+        description: `Please send so we receive it at ${CONTACT_EMAIL}`,
       });
       setSent(true);
       form.reset();
-    } finally {
-      setLoading(false);
+    } else {
+      toast.error("Could not send inquiry", {
+        description: result.error || `Please email ${CONTACT_EMAIL} directly.`,
+      });
     }
+
+    setLoading(false);
   };
 
   return (
