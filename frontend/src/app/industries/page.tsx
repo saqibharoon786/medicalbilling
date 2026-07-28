@@ -22,18 +22,16 @@ export default function IndustriesPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {industryLinks.map((item) => (
-              <div
+              <Link
                 key={item.label}
-                id={item.href.includes("#") ? item.href.split("#")[1] : undefined}
-                className="rounded-2xl border border-border/60 p-6 bg-card scroll-mt-28"
+                href={item.href}
+                className="rounded-2xl border border-border/60 p-6 bg-card hover:border-primary/40 hover:shadow-card-soft transition-all"
               >
-                <Link href={item.href} className="text-lg font-semibold hover:text-primary transition-colors">
-                  {item.label}
-                </Link>
+                <div className="text-lg font-semibold hover:text-primary transition-colors">{item.label}</div>
                 <p className="mt-2 text-sm text-muted-foreground">
                   End-to-end billing, coding, and AR support tailored for {item.label.toLowerCase()}.
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

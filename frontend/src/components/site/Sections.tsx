@@ -32,14 +32,20 @@ function serviceAnchorId(title: string) {
     "Payment Posting": "payment-posting",
     "Charge Entry": "charge-entry",
     "Eligibility Verification": "eligibility",
-    "Virtual Medical Assistant": "vma",
-    "Patient Billing": "patient-billing",
-    "Practice Management": "practice-management",
+    "Virtual Medical Assistant": "medical-billing",
+    "Patient Billing": "medical-billing",
+    "Practice Management": "rcm",
   };
   return map[title] ?? title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
 function specialtyAnchorId(name: string) {
+  const map: Record<string, string> = {
+    "Behavioral Health": "behavioral-health",
+    "Dental Billing": "dental",
+    Orthopedics: "orthopedics",
+  };
+  if (map[name]) return map[name];
   return name
     .toLowerCase()
     .replace(/\s+billing$/i, "")
@@ -294,21 +300,18 @@ export function ServicesSection({ compact = false }: { compact?: boolean }) {
             const serviceId = serviceAnchorId(title);
             return (
             <Reveal key={title} delay={(i % 8) * 0.04}>
-              <Card id={serviceId} className="group p-6 h-full rounded-2xl border-border/60 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 bg-card scroll-mt-28">
+              <Card className="group p-6 h-full rounded-2xl border-border/60 hover:border-primary/40 hover:shadow-elegant transition-all hover:-translate-y-1 bg-card">
                 <div className="h-11 w-11 rounded-xl bg-primary-gradient grid place-items-center shadow-card-soft group-hover:shadow-glow transition-shadow">
                   <Icon className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div className="mt-4 font-semibold text-lg">{title}</div>
                 <div className="mt-2 text-sm text-muted-foreground leading-relaxed">{desc}</div>
-                <button
-                  onClick={() => {
-                    emailUs(`Service Inquiry — ${title}`, `Hi ABS team,\n\nI'm interested in: ${title}\n\nName:\nPractice:\nPhone:\n`);
-                    toast.success("Opening email…", { description: `Send to ${CONTACT_EMAIL}` });
-                  }}
+                <Link
+                  href={`/services/${serviceId}`}
                   className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all"
                 >
                   Learn more <ChevronRight className="h-4 w-4" />
-                </button>
+                </Link>
               </Card>
             </Reveal>
             );
@@ -337,17 +340,20 @@ export function SpecialtiesSection() {
           <Link href="/specialties"><Button variant="outline" className="border-primary/30 text-primary">View all specialties <ArrowUpRight className="ml-1 h-4 w-4" /></Button></Link>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-          {specialties.map(({ icon: Icon, name }, i) => (
+          {specialties.map(({ icon: Icon, name }, i) => {
+            const slug = specialtyAnchorId(name);
+            return (
             <Reveal key={name} delay={(i % 6) * 0.04}>
-              <div
-                id={specialtyAnchorId(name)}
-                className="group cursor-pointer rounded-2xl border border-border/60 p-4 bg-card hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-elegant scroll-mt-28"
+              <Link
+                href={`/specialties/${slug}`}
+                className="group block rounded-2xl border border-border/60 p-4 bg-card hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-elegant"
               >
                 <Icon className="h-5 w-5 text-primary group-hover:text-emerald transition-colors" />
                 <div className="mt-3 font-medium text-sm">{name}</div>
-              </div>
+              </Link>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -22,10 +22,10 @@ const posts = [
 
 const hub = [
   { id: "cpt-codes", title: "CPT Codes", desc: "Common procedural terminology guides for accurate claim coding." },
-  { id: "icd-10-codes", title: "ICD-10 Codes", desc: "Diagnosis code references and documentation tips." },
+  { id: "icd-10", title: "ICD-10 Codes", desc: "Diagnosis code references and documentation tips." },
   { id: "hcpcs-codes", title: "HCPCS Codes", desc: "Supply, DME, and service code lookup resources." },
   { id: "modifiers", title: "Medical Billing Modifiers", desc: "Modifier guides that prevent denials and underpayments." },
-  { id: "denial-codes", title: "Denial Codes", desc: "CARC/RARC explanations and appeal playbooks." },
+  { id: "denial-management-guides", title: "Denial Codes", desc: "CARC/RARC explanations and appeal playbooks." },
   { id: "glossary", title: "Billing Glossary", desc: "Plain-language definitions for RCM terminology." },
   { id: "case-studies", title: "Case Studies", desc: "Real practice turnarounds and revenue wins." },
   { id: "whitepapers", title: "Whitepapers", desc: "In-depth research for CFOs and practice leaders." },
@@ -48,14 +48,14 @@ export function ResourcesPageContent() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {hub.map((item) => (
-              <div
+              <Link
                 key={item.id}
-                id={item.id}
-                className="rounded-xl border border-border/60 p-4 bg-card scroll-mt-28"
+                href={`/resources/${item.id}`}
+                className="rounded-xl border border-border/60 p-4 bg-card hover:border-primary/40 hover:shadow-card-soft transition-all"
               >
-                <div className="font-semibold">{item.title}</div>
+                <div className="font-semibold hover:text-primary">{item.title}</div>
                 <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

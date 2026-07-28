@@ -7,6 +7,7 @@ import {
   ProcessSection,
   CTASection,
 } from "@/components/site/Sections";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
@@ -26,14 +27,20 @@ export default function AboutPage() {
       <AboutSection />
       <WhyUsSection />
       <ProcessSection />
-      <section id="leadership" className="py-24 bg-secondary/50 scroll-mt-28">
+      <section className="py-24 bg-secondary/50">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <div className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Leadership Team</div>
-          <h2 className="text-3xl md:text-4xl font-bold">Experienced operator behind every account</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Experienced operators behind every account</h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            Our leadership teams brings decades of combined experience across clinical operations,
+            Our leadership team brings decades of combined experience across clinical operations,
             healthcare finance, and revenue cycle management — guiding strategy for 500+ practices nationwide.
           </p>
+          <Link
+            href="/leadership-team"
+            className="inline-flex mt-6 text-sm font-semibold text-primary hover:underline"
+          >
+            Meet the leadership team →
+          </Link>
         </div>
       </section>
       <CTASection />

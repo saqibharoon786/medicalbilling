@@ -22,18 +22,17 @@ export default function LocationsPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {locationLinks.map((loc) => (
-              <div
+              <Link
                 key={loc.label}
-                id={loc.href.includes("#") ? loc.href.split("#")[1] : undefined}
-                className="rounded-2xl border border-border/60 p-5 bg-card scroll-mt-28"
+                href={loc.href}
+                className="rounded-2xl border border-border/60 p-5 bg-card hover:border-primary/40 hover:shadow-card-soft transition-all"
               >
-                <Link href={loc.href} className="font-semibold hover:text-primary transition-colors">
-                  {loc.label}
-                </Link>
+                <div className="font-semibold hover:text-primary transition-colors">{loc.label}</div>
                 <p className="mt-1.5 text-sm text-muted-foreground">
-                  Specialty billing, credentialing & RCM support for providers in {loc.label === "All States" ? "every US market" : loc.label}.
+                  Specialty billing, credentialing & RCM support for providers in{" "}
+                  {loc.label === "All States" ? "every US market" : loc.label}.
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
           <p className="mt-10 text-sm text-muted-foreground text-center">
