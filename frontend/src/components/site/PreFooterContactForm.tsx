@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { CONTACT_EMAIL, sendInquiry } from "@/lib/contact";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 const fieldClass =
@@ -116,13 +117,20 @@ export function PreFooterContactForm() {
               {[
                 { icon: Clock, text: "Response within 2 business hours" },
                 { icon: ShieldCheck, text: "HIPAA-aware · Your data stays private" },
-                { icon: Mail, text: CONTACT_EMAIL },
-              ].map(({ icon: Icon, text }) => (
+                { icon: Phone, text: PHONE_DISPLAY, href: PHONE_TEL },
+                { icon: Mail, text: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+              ].map(({ icon: Icon, text, href }) => (
                 <li key={text} className="flex items-center gap-3 text-sm text-white/90">
                   <span className="h-10 w-10 shrink-0 rounded-xl bg-white/10 border border-white/15 grid place-items-center">
                     <Icon className="h-4 w-4 text-emerald" />
                   </span>
-                  <span className="break-all font-medium">{text}</span>
+                  {href ? (
+                    <a href={href} className="break-all font-medium hover:underline">
+                      {text}
+                    </a>
+                  ) : (
+                    <span className="break-all font-medium">{text}</span>
+                  )}
                 </li>
               ))}
             </ul>

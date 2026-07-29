@@ -1,7 +1,6 @@
 /** Site-wide navigation & footer links — SEO-ready structure */
 
-export const PHONE_DISPLAY = "+1 (800) 555-0142";
-export const PHONE_TEL = "tel:+18005550142";
+export { PHONE_DISPLAY, PHONE_TEL } from "@/lib/site-config";
 
 export type NavLink = { label: string; href: string };
 export type NavGroup = { heading: string; links: NavLink[] };

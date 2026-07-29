@@ -1,5 +1,7 @@
 /** All site form submissions and contact links go here. */
-export const CONTACT_EMAIL = "americanbillingsolutions@gmail.com";
+import { CONTACT_EMAIL } from "@/lib/site-config";
+
+export { CONTACT_EMAIL };
 
 export type FormPayload = Record<string, string>;
 

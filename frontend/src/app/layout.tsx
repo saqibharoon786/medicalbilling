@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { PreFooterContactForm } from "@/components/site/PreFooterContactForm";
-import { Toaster } from "@/components/ui/sonner";
+import { SiteChrome } from "@/components/site/SiteChrome";
+import { JsonLd } from "@/components/site/JsonLd";
+import {
+  localBusinessSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/schemas";
+import { SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,6 +24,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "American Billing Solutions — Medical Billing & RCM",
     template: "%s — American Billing Solutions",
@@ -51,13 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <PreFooterContactForm />
-          <Footer />
-        </div>
-        <Toaster position="top-right" richColors />
+        <JsonLd data={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

@@ -25,8 +25,8 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-2 space-y-4">
           <BrandLogo size="footer" />
           <p className="text-sm opacity-80 max-w-md">
-            Trusted by 500+ US healthcare providers to accelerate reimbursements,
-            reduce denials, and grow practice revenue with certified billing experts and HIPAA-compliant technology.
+            Medical billing and revenue cycle support for U.S. healthcare providers — dedicated specialists,
+            HIPAA-compliant workflows, and clear reporting so you can focus on patient care.
           </p>
           <div className="space-y-2 text-sm opacity-90">
             <a href={PHONE_TEL} className="flex items-center gap-2 hover:underline">
@@ -35,8 +35,9 @@ export function Footer() {
             <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-2 hover:underline">
               <Mail className="h-4 w-4" /> {CONTACT_EMAIL}
             </a>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" /> 200 Congress Ave, Suite 900, Austin TX 78701
+            <div className="flex items-start gap-2">
+              <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
+              <span>602 W Swann Ave #100, Tampa, FL 33609, United States</span>
             </div>
           </div>
           <div className="flex gap-2 pt-2">

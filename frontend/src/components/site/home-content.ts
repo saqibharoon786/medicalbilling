@@ -327,16 +327,14 @@ export const homeFaqs: [string, string][] = [
   ],
 ];
 
-/** Maps public marketing URLs → internal app routes */
+/** Maps public marketing URLs → internal app routes.
+ * Rewrites live in next.config.ts (do not import this into next.config).
+ * Dedicated pillar pages: billing, RCM, coding, credentialing, insurance verification
+ */
 export const serviceUrlRewrites: { source: string; destination: string }[] = [
-  // /medical-billing-services is a dedicated pillar page (app/medical-billing-services)
-  { source: "/revenue-cycle-management", destination: "/services/rcm" },
-  { source: "/medical-coding-services", destination: "/services/medical-coding" },
   { source: "/claims-management-services", destination: "/services/charge-entry" },
   { source: "/denial-management-services", destination: "/services/denial-management" },
-  { source: "/insurance-verification-services", destination: "/services/eligibility" },
   { source: "/prior-authorization-services", destination: "/services/prior-authorization" },
-  { source: "/provider-credentialing-services", destination: "/services/credentialing" },
   { source: "/provider-enrollment-services", destination: "/services/provider-enrollment" },
   { source: "/payment-posting-services", destination: "/services/payment-posting" },
   { source: "/accounts-receivable-management", destination: "/services/ar-follow-up" },

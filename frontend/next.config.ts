@@ -1,9 +1,19 @@
 import type { NextConfig } from "next";
 import path from "path";
 import { fileURLToPath } from "url";
-import { serviceUrlRewrites } from "./src/components/site/home-content";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/** Public marketing URLs → internal app routes (keep in sync with home-content links) */
+const serviceUrlRewrites = [
+  // Dedicated pillars: billing, RCM, coding, credentialing, insurance verification
+  { source: "/claims-management-services", destination: "/services/charge-entry" },
+  { source: "/denial-management-services", destination: "/services/denial-management" },
+  { source: "/prior-authorization-services", destination: "/services/prior-authorization" },
+  { source: "/provider-enrollment-services", destination: "/services/provider-enrollment" },
+  { source: "/payment-posting-services", destination: "/services/payment-posting" },
+  { source: "/accounts-receivable-management", destination: "/services/ar-follow-up" },
+];
 
 const specialtyRewrites = [
   { source: "/specialties/mental-health-billing", destination: "/specialties/mental-health" },
@@ -30,7 +40,9 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [],
   },
-  transpilePackages: ["framer-motion"],
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   async rewrites() {
     return [...serviceUrlRewrites, ...specialtyRewrites, ...resourceRewrites];
   },

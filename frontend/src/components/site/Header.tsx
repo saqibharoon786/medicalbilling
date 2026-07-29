@@ -63,6 +63,7 @@ const serviceMeta: Record<string, { icon: LucideIcon; desc: string }> = {
   "Provider Enrollment": { icon: UserCheck, desc: "New provider onboarding" },
   "Eligibility Verification": { icon: Search, desc: "Benefits checked before visits" },
   "Prior Authorization": { icon: KeyRound, desc: "Fast auth submission & follow-up" },
+  "Claims Management": { icon: PenSquare, desc: "Scrub, submit, track, resolve" },
   "Charge Entry": { icon: PenSquare, desc: "Audit-ready charge capture" },
   "Payment Posting": { icon: CreditCard, desc: "Same-day ERA/EOB posting" },
   "AR Recovery": { icon: RefreshCw, desc: "Aged AR recovery programs" },
@@ -105,6 +106,7 @@ const industryMeta: Record<string, { icon: LucideIcon; desc: string }> = {
 
 const specialtyIcons: Record<string, LucideIcon> = {
   "Mental Health Billing": Brain,
+  "Behavioral Health Billing": Brain,
   "Psychiatry Billing": Brain,
   "Psychology Billing": Brain,
   "Therapy Billing": HeartPulse,
@@ -117,6 +119,7 @@ const specialtyIcons: Record<string, LucideIcon> = {
   "Gastroenterology Billing": Stethoscope,
   "Neurology Billing": Brain,
   "Internal Medicine Billing": Stethoscope,
+  "Family Practice Billing": Stethoscope,
   "Family Medicine Billing": Stethoscope,
   "Pediatrics Billing": HeartPulse,
   "Pain Management Billing": Activity,
@@ -126,6 +129,7 @@ const specialtyIcons: Record<string, LucideIcon> = {
   "Urgent Care Billing": Hospital,
   "Home Health Billing": Building2,
   "Radiology Billing": Search,
+  "Dental Billing": Sparkles,
 };
 
 function hasMega(n: NavItem): n is NavItem & { mega: MegaKey } {

@@ -12,6 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Mail, Phone, MapPin, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { CONTACT_EMAIL, sendInquiry } from "@/lib/contact";
+import { ADDRESS_SHORT, BUSINESS_HOURS, PHONE_DISPLAY, PHONE_TEL } from "@/lib/site-config";
+
 
 export function ContactPageContent() {
   const [loading, setLoading] = useState(false);
@@ -178,7 +180,13 @@ export function ContactPageContent() {
 
           <Reveal delay={0.1}>
             <div className="space-y-5">
-              <InfoCard icon={Phone} title="Talk to us" body="+1 (800) 555-0142" hint="Mon–Fri 8am–8pm EST" />
+              <InfoCard
+                icon={Phone}
+                title="Talk to us"
+                body={PHONE_DISPLAY}
+                hint={BUSINESS_HOURS}
+                href={PHONE_TEL}
+              />
               <InfoCard
                 icon={Mail}
                 title="Email us"
@@ -186,7 +194,12 @@ export function ContactPageContent() {
                 hint="Responses within 2 hours"
                 href={`mailto:${CONTACT_EMAIL}`}
               />
-              <InfoCard icon={MapPin} title="Headquarters" body="200 Congress Ave, Suite 900" hint="Austin, TX 78701" />
+              <InfoCard
+                icon={MapPin}
+                title="Headquarters"
+                body="602 W Swann Ave #100"
+                hint="Tampa, FL 33609, United States"
+              />
               <InfoCard icon={Clock} title="Support" body="24 / 7 for active clients" hint="Named account manager" />
               <Card className="rounded-2xl overflow-hidden border-border/60 shadow-card-soft">
                 <div className="relative h-64 bg-secondary">
@@ -204,8 +217,8 @@ export function ContactPageContent() {
                       <div className="mx-auto h-12 w-12 rounded-full bg-primary grid place-items-center shadow-glow">
                         <MapPin className="h-6 w-6 text-primary-foreground" />
                       </div>
-                      <div className="mt-3 font-semibold">Austin, TX Headquarters</div>
-                      <div className="text-sm text-muted-foreground">30.2672° N, 97.7431° W</div>
+                      <div className="mt-3 font-semibold">Tampa, FL Headquarters</div>
+                      <div className="text-sm text-muted-foreground">{ADDRESS_SHORT}</div>
                     </div>
                   </div>
                 </div>

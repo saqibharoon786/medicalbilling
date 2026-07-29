@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { HomePageContent } from "@/components/site/HomePageContent";
 import { homeFaqs } from "@/components/site/home-content";
+import { JsonLd } from "@/components/site/JsonLd";
+import { faqPageSchema } from "@/lib/schemas";
 
 export const metadata: Metadata = {
   title: {
@@ -15,32 +17,10 @@ export const metadata: Metadata = {
   },
 };
 
-function FaqJsonLd() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: homeFaqs.map(([q, a]) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: a,
-      },
-    })),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
-}
-
 export default function HomePage() {
   return (
     <>
-      <FaqJsonLd />
+      <JsonLd data={faqPageSchema(homeFaqs)} />
       <HomePageContent />
     </>
   );

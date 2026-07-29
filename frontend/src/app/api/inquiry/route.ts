@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-/** Must match CONTACT_EMAIL in src/lib/contact.ts */
-const CONTACT_EMAIL = "americanbillingsolutions@gmail.com";
+/** Must match CONTACT_EMAIL in src/lib/site-config.ts */
+import { CONTACT_EMAIL } from "@/lib/site-config";
 
 export const runtime = "nodejs";
 
