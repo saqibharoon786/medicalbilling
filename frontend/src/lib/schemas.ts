@@ -47,7 +47,8 @@ export function organizationSchema() {
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    // Dual type so validators show LocalBusiness (ProfessionalService is a LocalBusiness subtype)
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${SITE_URL}/#localbusiness`,
     name: SITE_NAME,
     image: LOGO_URL,
@@ -81,7 +82,9 @@ export function localBusinessSchema() {
       },
     ],
     parentOrganization: {
+      "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
+      name: SITE_LEGAL_NAME,
     },
   };
 }
