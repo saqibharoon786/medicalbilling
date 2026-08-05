@@ -35,4 +35,5 @@ export const PILLAR_SERVICE_PATHS = [
   "/medical-coding-services",
   "/provider-credentialing-services",
   "/insurance-verification-services",
+  "/accounts-receivable-management",
 ] as const;
