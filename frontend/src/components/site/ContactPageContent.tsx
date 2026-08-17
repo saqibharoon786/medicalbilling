@@ -46,26 +46,11 @@ export function ContactPageContent() {
 
     const result = await sendInquiry("Website Contact — Free Consultation", fields);
 
-    if (result.ok) {
-      toast.success("Message sent!", {
-        description: `Inquiry details delivered to ${CONTACT_EMAIL}`,
-      });
+    if (result.ok || result.method === "mailto") {
       setSent(true);
       form.reset();
       setSpecialty("");
       setContactTime("");
-    } else if (result.method === "mailto") {
-      toast.message("Email app opened", {
-        description: `Please send so we receive it at ${CONTACT_EMAIL}`,
-      });
-      setSent(true);
-      form.reset();
-      setSpecialty("");
-      setContactTime("");
-    } else {
-      toast.error("Could not send inquiry", {
-        description: result.error || `Please email ${CONTACT_EMAIL} directly.`,
-      });
     }
 
     setLoading(false);

@@ -9,6 +9,7 @@ export type InquiryResult = {
   ok: boolean;
   method: "api" | "mailto";
   error?: string;
+  needsActivation?: boolean;
 };
 
 /**
@@ -50,7 +51,12 @@ export async function sendInquiry(
     };
 
     if (!res.ok || !data.ok) {
-      throw new Error(data.error || `Request failed (${res.status})`);
+      return {
+        ok: false,
+        method: "api",
+        error: data.error || `Request failed (${res.status})`,
+        needsActivation: data.needsActivation,
+      };
     }
 
     return { ok: true, method: "api" };

@@ -53,22 +53,9 @@ export function PreFooterContactForm() {
 
     const result = await sendInquiry("Website Inquiry — American Billing Solutions", fields);
 
-    if (result.ok) {
+    if (result.ok || result.method === "mailto") {
       setSent(true);
       form.reset();
-      toast.success("Message sent!", {
-        description: `Inquiry details delivered to ${CONTACT_EMAIL}`,
-      });
-    } else if (result.method === "mailto") {
-      toast.message("Email app opened", {
-        description: `Please send so we receive it at ${CONTACT_EMAIL}`,
-      });
-      setSent(true);
-      form.reset();
-    } else {
-      toast.error("Could not send inquiry", {
-        description: result.error || `Please email ${CONTACT_EMAIL} directly.`,
-      });
     }
 
     setLoading(false);

@@ -84,20 +84,9 @@ export function Footer() {
                   Message: "Please add me to the American Billing Solutions newsletter.",
                   Source: "Website — Footer newsletter",
                 });
-                if (result.ok) {
-                  toast.success("Subscribed!", {
-                    description: `Details sent to ${CONTACT_EMAIL}`,
-                  });
-                } else if (result.method === "mailto") {
-                  toast.message("Email app opened", {
-                    description: `Please send so we receive it at ${CONTACT_EMAIL}`,
-                  });
-                } else {
-                  toast.error("Could not subscribe", {
-                    description: result.error || `Email ${CONTACT_EMAIL} directly.`,
-                  });
+                if (result.ok || result.method === "mailto") {
+                  setEmail("");
                 }
-                setEmail("");
               }}
               className="flex gap-2"
             >
