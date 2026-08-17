@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
@@ -7,38 +8,31 @@ type BrandLogoProps = {
   size?: "header" | "footer";
 };
 
+const LOGO_SRC = "/abs-logo.jpg";
+const LOGO_WIDTH = 1024;
+const LOGO_HEIGHT = 479;
+
 export function BrandLogo({ className, size = "header" }: BrandLogoProps) {
-  const heights = size === "header" ? "h-[58px] md:h-[70px]" : "h-[64px] md:h-[78px]";
+  const isFooter = size === "footer";
 
   return (
     <Link
       href="/"
-      className={cn(
-        "inline-flex items-center shrink-0 overflow-visible",
-        // Kill any accidental white plate behind the mark
-        "bg-transparent !shadow-none !border-0 !ring-0 !outline-none",
-        className,
-      )}
+      className={cn("inline-flex items-center shrink-0", className)}
       aria-label="American Billing Solutions — Home"
     >
-      <img
-        src="/abs-logo-clear.png"
-        alt="American Billing Solutions"
-        width={867}
-        height={473}
-        decoding="async"
+      <Image
+        src={LOGO_SRC}
+        alt="American Billing Solutions — Accurate. Efficient. Reliable."
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        priority={size === "header"}
         className={cn(
-          heights,
-          "w-auto max-w-[min(55vw,340px)] md:max-w-[380px]",
-          "object-contain object-left select-none",
-          "bg-transparent shadow-none border-0 outline-none ring-0 rounded-none",
-          // On light header: keep original colors; in dark mode: invert to white
-          size === "header" && "mix-blend-multiply dark:mix-blend-normal dark:brightness-0 dark:invert",
-          // Footer: make the logo solid white for excellent contrast on the dark navy background
-          size === "footer" && "brightness-0 invert drop-shadow-[0_1px_8px_rgba(255,255,255,0.15)]",
+          "w-auto object-contain object-left select-none",
+          size === "header" && "h-[44px] sm:h-[50px] md:h-[56px] max-w-[min(75vw,270px)] sm:max-w-[300px] md:max-w-[320px]",
+          isFooter && "h-[44px] md:h-[50px] max-w-[260px] md:max-w-[280px] brightness-0 invert",
         )}
       />
     </Link>
   );
 }
-

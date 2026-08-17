@@ -26,7 +26,7 @@ export const ADDRESS_SHORT = "602 W Swann Ave #100, Tampa, FL 33609";
 
 export const BUSINESS_HOURS = "Mon–Fri 8am–8pm EST";
 
-export const LOGO_URL = `${SITE_URL}/abs-logo-clear.png`;
+export const LOGO_URL = `${SITE_URL}/abs-logo.jpg`;
 
 /** Marketing pillar pages (root-level service URLs) — also discovered via app/ folders */
 export const PILLAR_SERVICE_PATHS = [
