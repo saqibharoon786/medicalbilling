@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -41,15 +41,31 @@ export function Footer() {
             </div>
           </div>
           <div className="flex gap-2 pt-2">
-            {[Facebook, Twitter, Linkedin, Youtube].map((Icon, i) => (
-              <button
-                key={i}
-                onClick={() => toast("Opening social profile…")}
-                className="h-9 w-9 grid place-items-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-              >
-                <Icon className="h-4 w-4" />
-              </button>
-            ))}
+            <a
+              href="https://www.facebook.com/profile.php?id=61592396980243"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-9 w-9 grid place-items-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
+              aria-label="Facebook"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a
+              href="https://www.instagram.com/americanbillingsolutions/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-9 w-9 grid place-items-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
+            <button
+              onClick={() => toast("Opening LinkedIn profile…")}
+              className="h-9 w-9 grid place-items-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </button>
           </div>
         </div>
 

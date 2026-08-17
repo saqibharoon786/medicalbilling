@@ -32,12 +32,13 @@ export function BrandLogo({ className, size = "header" }: BrandLogoProps) {
           "w-auto max-w-[min(55vw,340px)] md:max-w-[380px]",
           "object-contain object-left select-none",
           "bg-transparent shadow-none border-0 outline-none ring-0 rounded-none",
-          // On light header: white pixels multiply away so no white box can show
-          size === "header" && "mix-blend-multiply dark:mix-blend-normal",
-          // Footer: soft glow for contrast on dark navy — still no white card
-          size === "footer" && "drop-shadow-[0_1px_10px_rgba(255,255,255,0.25)]",
+          // On light header: keep original colors; in dark mode: invert to white
+          size === "header" && "mix-blend-multiply dark:mix-blend-normal dark:brightness-0 dark:invert",
+          // Footer: make the logo solid white for excellent contrast on the dark navy background
+          size === "footer" && "brightness-0 invert drop-shadow-[0_1px_8px_rgba(255,255,255,0.15)]",
         )}
       />
     </Link>
   );
 }
+
