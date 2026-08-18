@@ -1,4 +1,4 @@
-name: SSH Network Test
+name: SSH Connection Test
 
 on:
   workflow_dispatch:
@@ -8,9 +8,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test TCP Port 22
-        run: |
-          echo "Testing 72.61.242.70:22"
-          timeout 10 bash -c '</dev/tcp/72.61.242.70/22' \
-            && echo "PORT 22 IS OPEN" \
-            || echo "PORT 22 IS NOT REACHABLE"
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          port: ${{ secrets.SERVER_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "================================"
+            echo "SSH CONNECTION SUCCESSFUL"
+            echo "================================"
+            echo "Server: $(hostname)"
+            echo "User: $(whoami)"
+            echo "Directory: $(pwd)"
+            echo "Node: $(node -v)"
+            echo "NPM: $(npm -v)"
+            echo "Git: $(git --version)"
