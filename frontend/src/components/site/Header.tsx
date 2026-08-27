@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -136,14 +136,41 @@ function hasMega(n: NavItem): n is NavItem & { mega: MegaKey } {
   return "mega" in n && Boolean(n.mega);
 }
 
+const themeListeners = new Set<() => void>();
+
+function subscribeTheme(callback: () => void) {
+  themeListeners.add(callback);
+  return () => themeListeners.delete(callback);
+}
+
+function getThemeSnapshot() {
+  return localStorage.getItem("theme") === "dark";
+}
+
+function getThemeServerSnapshot() {
+  return false;
+}
+
+function notifyThemeChange() {
+  themeListeners.forEach((listener) => listener());
+}
+
 export function Header() {
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MegaKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState<MegaKey | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [dark, setDark] = useState(false);
+  const dark = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getThemeServerSnapshot);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+    setOpenMenu(null);
+    setMobileOpen(null);
+  }
 
   const openMega = (key: MegaKey) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -163,23 +190,14 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" && localStorage.getItem("theme");
-    const prefersDark = stored === "dark";
-    setDark(prefersDark);
-    document.documentElement.classList.toggle("dark", prefersDark);
-  }, []);
-
-  useEffect(() => {
-    setOpen(false);
-    setOpenMenu(null);
-    setMobileOpen(null);
-  }, [pathname]);
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
 
   const toggleTheme = () => {
     const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("theme", next ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", next);
+    notifyThemeChange();
   };
 
   const requestAudit = () => {

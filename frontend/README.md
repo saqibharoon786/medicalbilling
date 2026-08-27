@@ -1,29 +1,53 @@
-# Welcome to your Lovable project
+# American Billing Solutions
 
-This project was built with [Lovable](https://lovable.dev).
+Next.js 15 marketing website for medical billing and revenue cycle management services.
 
-## Build with Lovable
+## Stack
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+- **Next.js 15** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Radix UI** + shadcn/ui components
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## Getting started
 
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-## Built with
+Open [http://localhost:3000](http://localhost:3000).
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## Scripts
+
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start development server |
+| `npm run build`| Production build         |
+| `npm run start`| Serve production build   |
+| `npm run lint` | Run ESLint               |
+
+## Environment
+
+Copy `.env.example` to `.env.local` and set:
+
+- `NEXT_PUBLIC_SITE_URL` — public site URL (e.g. `https://americanbillingsolutions.com`)
+- `WEB3FORMS_ACCESS_KEY` — optional; primary form delivery via Web3Forms
+- `FORMSUBMIT_ENDPOINT` — optional; FormSubmit.co fallback for `/api/inquiry`
+
+## Project structure
+
+```
+src/
+  app/           # Next.js App Router pages & API routes
+  components/    # UI and site components
+  lib/           # Config, schemas, utilities
+  hooks/         # React hooks
+public/          # Static assets
+```
+
+## Deployment
+
+Production deploys via GitHub Actions to VPS with PM2 (`americanbilling` process). See `.github/workflows/deploy.yaml`.

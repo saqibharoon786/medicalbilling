@@ -537,7 +537,7 @@ export function TestimonialsSection() {
                 ))}
               </div>
               <blockquote className="text-xl md:text-2xl leading-relaxed font-display">
-                "{testimonials[i].quote}"
+                &ldquo;{testimonials[i].quote}&rdquo;
               </blockquote>
               <div className="mt-8 flex items-center gap-4">
                 <div className="h-14 w-14 rounded-full bg-primary-gradient grid place-items-center text-primary-foreground font-bold text-lg">
@@ -654,7 +654,7 @@ export function CTASection() {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">Ready to increase your practice revenue?</h2>
               <p className="mt-4 text-lg text-white/85 max-w-2xl">
-                Get a free 30-minute revenue audit. We'll benchmark your KPIs against your specialty
+                Get a free 30-minute revenue audit. We&apos;ll benchmark your KPIs against your specialty
                 and hand you a written opportunity report — no obligation.
               </p>
             </div>
