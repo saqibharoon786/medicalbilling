@@ -20,7 +20,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="Builts by clinicians. Engineered for revenue."
+        title="Builts   by clinicians. Engineered for revenue."
         description="15 years of relentless focus on one problem — getting healthcare providers paid faster, in full, without the paperwork burden."
       />
       <StatsSection />

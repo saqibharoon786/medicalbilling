@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from "@/lib/contact";
 export const metadata: Metadata = {
   title: "Privacy & HIPAA",
   description:
-    "How Medivantek Billing collects, uses, discloses, and safeguards personal information and protected health information.",
+    "How American Billing Solutions collects, uses, discloses, and safeguards personal information and protected health information.",
 };
 
 export default function PrivacyPage() {
@@ -14,12 +14,12 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Privacy & compliance"
         title="Privacy Policy"
-        description="How Medivantek Billing protects the information entrusted to us by providers and patients."
+        description="How American Billing Solutions protects the information entrusted to us by providers and patients."
       />
       <article className="mx-auto max-w-4xl px-6 py-16 md:py-24">
         <div className="mb-12 flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Medivantek Billing</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">American Billing Solutions</p>
             <p className="mt-2 text-muted-foreground">Privacy, security, and responsible data stewardship</p>
           </div>
           <div className="rounded-xl border border-border bg-muted/40 px-5 py-3 sm:text-right">
@@ -28,9 +28,9 @@ export default function PrivacyPage() {
           </div>
         </div>
 
-        <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-display prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+        <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
           <p className="lead">
-            Medivantek Billing is committed to protecting the privacy and confidentiality of the personal and
+            American Billing Solutions is committed to protecting the privacy and confidentiality of the personal and
             sensitive information we collect and handle while providing medical billing, credentialing, and
             related services.
           </p>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           </p>
           <div className="not-prose my-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-primary/15 bg-primary/4 p-6">
-              <h3 className="font-display text-lg font-semibold text-foreground">Security measures</h3>
+              <h3 className="font-display text-lg font-bold text-foreground">Security measures</h3>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                 <li><strong className="text-foreground">Encryption:</strong> Sensitive information, including PHI, is encrypted during transmission and at rest using industry-standard protocols.</li>
                 <li><strong className="text-foreground">Access control:</strong> Role-based access limits sensitive data to authorized personnel with a need to know.</li>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
               </ul>
             </div>
             <div className="rounded-2xl border border-border bg-muted/30 p-6">
-              <h3 className="font-display text-lg font-semibold text-foreground">Ongoing oversight</h3>
+              <h3 className="font-display text-lg font-bold text-foreground">Ongoing oversight</h3>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
                 <li><strong className="text-foreground">Employee training:</strong> Employees receive regular training on data privacy, security, HIPAA, and related requirements.</li>
                 <li><strong className="text-foreground">Data retention:</strong> We retain information only as long as necessary or legally required, then securely delete or destroy it.</li>
