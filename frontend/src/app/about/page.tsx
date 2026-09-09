@@ -33,7 +33,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold">Experienced operators behind every account</h2>
           <p className="mt-4 text-muted-foreground text-lg">
             Our leadership team brings decades of combined experience across clinical operations,
-            healthcare finance, and revenue cycle management — guiding strategy for 500+ practices nationwide.
+            healthcare finance, and revenues cycle management — guiding strategy for 500+ practices nationwide.
           </p>
           <Link
             href="/leadership-team"
