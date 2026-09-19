@@ -5,7 +5,7 @@ export const SITE_LEGAL_NAME = "American Billing Solutions";
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://americanbillingsolutions.com";
 
-export const CONTACT_EMAIL = "americanbillingsolutions@gmail.com";
+export const CONTACT_EMAIL = "info@americanbillingsolutions.com";
 
 export const PHONE_DISPLAY = "(850) 470-1312";
 export const PHONE_TEL = "tel:+18504701312";
